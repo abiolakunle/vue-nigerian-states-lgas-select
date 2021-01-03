@@ -1,28 +1,27 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <StatesSelect :handleStateChanged="handleStateChanged" />
+    <LocalGovtSelect :handleLgaChanged="handleLgaChanged" :state="state" />
+    <StatesWithLgas :handleSelectChanged="handleSelectChanged" />
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import { StatesSelect, LocalGovtSelect, StatesWithLgas } from "./components";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { StatesSelect, LocalGovtSelect, StatesWithLgas },
+  name: "App",
+  data() {
+    return { state: undefined };
+  },
+  methods: {
+    handleStateChanged(state) {
+      this.state = state;
+    },
+    handleLgaChanged() {},
+    handleSelectChanged(state, lga) {
+      console.log("State & lga", state, lga);
+    },
+  },
+};
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
